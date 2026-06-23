@@ -12,7 +12,7 @@ async function main() {
 
   // Step B — Connect token
   const tokenAddress = "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512" as const;
-  const token = await viem.getContractAt("MyToken", tokenAddress);
+  const token = (await viem.getContractAt("MyToken", tokenAddress)) as any;
 
   // Step C — Balance check (LOGIN dashboard)
   console.log("User1 balance:", (await token.read.balanceOf([user1.account.address])).toString());
