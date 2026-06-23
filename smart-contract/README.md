@@ -1,57 +1,31 @@
-# Sample Hardhat 3 Project (`node:test` and `viem`)
+# 🟢 Project 1: Hello Blockchain (Smart Contract)
 
-This project showcases a Hardhat 3 project using the native Node.js test runner (`node:test`) and the `viem` library for Ethereum interactions.
+## What we built
 
-To learn more about Hardhat 3, please visit the [Getting Started guide](https://hardhat.org/docs/getting-started#getting-started-with-hardhat-3). To share your feedback, join our [Hardhat 3](https://hardhat.org/hardhat3-telegram-group) Telegram group or [open an issue](https://github.com/NomicFoundation/hardhat/issues/new) in our GitHub issue tracker.
+A `HelloWorld` Solidity contract that stores a message on-chain, with functions to read and update it. Deployed and interacted with using Hardhat 3 + viem.
 
-## Project Overview
+## What we learned
 
-This example project includes:
+- Solidity basics: state variables, `public` getters, `view`/non-`view` functions
+- Hardhat 3 project setup with the viem toolbox
+- Writing a deploy script using `network.create()` and `viem.deployContract()`
+- Writing an interaction script using `viem.getContractAt()`
+- Reading contract state with `.read.*` and writing with `.write.*`
+- Running scripts with `hardhat run` against a local network
 
-- A simple Hardhat configuration file.
-- Foundry-compatible Solidity unit tests.
-- TypeScript integration tests using [`node:test`](nodejs.org/api/test.html), the new Node.js native test runner, and [`viem`](https://viem.sh/).
-- Examples demonstrating how to connect to different types of networks, including locally simulating OP mainnet.
+## Directory structure
 
-## Usage
-
-### Running Tests
-
-To run all the tests in the project, execute the following command:
-
-```shell
-npx hardhat test
+```
+contracts/     Solidity source files
+scripts/       Deploy & interaction scripts
+ignition/      Hardhat Ignition deployment modules
+test/          Integration & unit tests
 ```
 
-You can also selectively run the Solidity or `node:test` tests:
+## Commands
 
-```shell
-npx hardhat test solidity
-npx hardhat test nodejs
-```
-
-### Make a deployment to Sepolia
-
-This project includes an example Ignition module to deploy the contract. You can deploy this module to a locally simulated chain or to Sepolia.
-
-To run the deployment to a local chain:
-
-```shell
-npx hardhat ignition deploy ignition/modules/Counter.ts
-```
-
-To run the deployment to Sepolia, you need an account with funds to send the transaction. The provided Hardhat configuration includes a Configuration Variable called `SEPOLIA_PRIVATE_KEY`, which you can use to set the private key of the account you want to use.
-
-You can set the `SEPOLIA_PRIVATE_KEY` variable using the `hardhat-keystore` plugin or by setting it as an environment variable.
-
-To set the `SEPOLIA_PRIVATE_KEY` config variable using `hardhat-keystore`:
-
-```shell
-npx hardhat keystore set SEPOLIA_PRIVATE_KEY
-```
-
-After setting the variable, you can run the deployment with the Sepolia network:
-
-```shell
-npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
+```bash
+npx hardhat compile
+npx hardhat run scripts/deploy.ts --network localhost
+npx hardhat run scripts/interact.ts --network localhost
 ```
