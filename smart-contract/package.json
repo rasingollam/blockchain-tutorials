@@ -1,0 +1,15 @@
+{
+  "name": "smart-contract",
+  "version": "1.0.0",
+  "description": "🟢 Project 1: Hello Blockchain (Smart Contract) 💡 What you are building",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "hardhat": "^3.9.0"
+  }
+}
