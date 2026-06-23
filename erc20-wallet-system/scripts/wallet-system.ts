@@ -29,7 +29,7 @@ async function main() {
 
   // Step D — Transfer system (user1 sends 10 tokens to user2)
   console.log("Transferring 10 tokens from User1 to User2...");
-  const txHash = await token.write.transfer([user3.account.address, parseUnits("30", DECIMALS)]);
+  const txHash = await token.write.transfer([user2.account.address, parseUnits("30", DECIMALS)]);
   console.log("Transfer tx:", txHash);
 
   // Step E — After transfer
