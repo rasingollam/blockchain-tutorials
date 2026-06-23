@@ -1,4 +1,8 @@
 import { network } from "hardhat";
+import { formatUnits, parseUnits } from "viem";
+
+const DECIMALS = 18;
+const TOKEN = "JTK";
 
 async function main() {
   const { viem } = await network.create();
@@ -15,19 +19,23 @@ async function main() {
   const token = (await viem.getContractAt("MyToken", tokenAddress)) as any;
 
   // Step C — Balance check (LOGIN dashboard)
-  console.log("User1 balance:", (await token.read.balanceOf([user1.account.address])).toString());
-  console.log("User2 balance:", (await token.read.balanceOf([user2.account.address])).toString());
-  console.log("User3 balance:", (await token.read.balanceOf([user3.account.address])).toString());
+  function showBalance(label: string, raw: bigint) {
+    console.log(`${label} balance: ${formatUnits(raw, DECIMALS)} ${TOKEN}`);
+  }
 
-  // Step D — Transfer system (user1 sends 1000 tokens to user2)
-  console.log("Transferring 1000 tokens from User1 to User2...");
-  const txHash = await token.write.transfer([user2.account.address, 1000n]);
+  showBalance("User1", await token.read.balanceOf([user1.account.address]));
+  showBalance("User2", await token.read.balanceOf([user2.account.address]));
+  showBalance("User3", await token.read.balanceOf([user3.account.address]));
+
+  // Step D — Transfer system (user1 sends 10 tokens to user2)
+  console.log("Transferring 10 tokens from User1 to User2...");
+  const txHash = await token.write.transfer([user2.account.address, parseUnits("10", DECIMALS)]);
   console.log("Transfer tx:", txHash);
 
-//   // Step E — After transfer
-  console.log("User1:", (await token.read.balanceOf([user1.account.address])).toString());
-  console.log("User2:", (await token.read.balanceOf([user2.account.address])).toString());
-  console.log("User3:", (await token.read.balanceOf([user3.account.address])).toString());
+  // Step E — After transfer
+  showBalance("User1", await token.read.balanceOf([user1.account.address]));
+  showBalance("User2", await token.read.balanceOf([user2.account.address]));
+  showBalance("User3", await token.read.balanceOf([user3.account.address]));
 }
 
 main().catch(console.error);
