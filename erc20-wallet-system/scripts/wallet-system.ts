@@ -27,9 +27,9 @@ async function main() {
   showBalance("User2", await token.read.balanceOf([user2.account.address]));
   showBalance("User3", await token.read.balanceOf([user3.account.address]));
 
-  // Step D — Transfer system (user1 sends 10 tokens to user2)
-  console.log("Transferring 10 tokens from User1 to User2...");
-  const txHash = await token.write.transfer([user2.account.address, parseUnits("30", DECIMALS)]);
+  // Step D — Transfer system (user3 sends 30 tokens to user2)
+  console.log("Transferring 30 tokens from User3 to User2...");
+  const txHash = await token.write.transfer([user3.account.address, parseUnits("30", DECIMALS)], { account: user1.account.address });
   console.log("Transfer tx:", txHash);
 
   // Step E — After transfer
